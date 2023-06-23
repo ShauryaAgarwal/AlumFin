@@ -1,0 +1,418 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlumFin | Connecting Students and Alumni</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Header */
+    header {
+      background-color: #333;
+      color: #fff;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .navigation {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navigation li {
+      display: inline-block;
+      margin-left: 20px;
+    }
+
+    .navigation li a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* Hero Section */
+    .hero {
+      background-color: #f1f1f1;
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .tagline {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 40px;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #333;
+      color: #fff;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #555;
+    }
+
+    /* Section Styles */
+    .section {
+      padding: 60px 0;
+    }
+
+    .section h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .section p {
+      margin-bottom: 20px;
+    }
+
+    /* Footer Styles */
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    footer a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* Popup Styles */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s, opacity 0.3s;
+    }
+
+    .popup.active {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .popup-content {
+      background-color: #fff;
+      padding: 40px;
+      max-width: 400px;
+      text-align: center;
+      border-radius: 8px;
+    }
+
+    .popup-buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .popup-buttons button {
+      margin: 0 10px;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .popup-buttons .create-account-button {
+      background-color: green;
+      color: #fff;
+    }
+
+    .popup-buttons .sign-in-button {
+      background-color: blue;
+      color: #fff;
+    }
+    
+    .close-popup-button {
+      background-color: transparent;
+      border: none;
+      color: #333;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .close-popup-button:hover {
+      color: #555;
+    }
+    
+    /* Name Popup Styles */
+    .name-popup {
+      display: none;
+    }
+
+    .name-popup.active {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 999;
+    }
+    
+    .name-popup-content {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 4px;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .name-popup h2 {
+      margin-top: 0;
+    }
+
+    .name-popup label {
+      display: block;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .name-popup input[type="text"],
+    .name-popup input[type="email"],
+    .name-popup input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .name-popup input[type="radio"] {
+      margin-right: 5px;
+    }
+
+    .submit-button {
+      background-color: green;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      margin-top: 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    
+    .submit-button:disabled {
+      background-color: gray;
+      cursor: not-allowed;
+    }
+
+    .submit-button:hover {
+      background-color: #3b8e3b;
+    }
+  </style>
+  <script>
+    // JavaScript for handling the popup functionality
+    window.addEventListener('DOMContentLoaded', function () {
+      const getStartedButton = document.querySelector('.get-started-button');
+      const popup = document.querySelector('.popup');
+      const closePopupButton = document.querySelector('.close-popup-button');
+      const createAccountButton = document.querySelector('.create-account-button');
+      const signInButton = document.querySelector('.sign-in-button');
+      const namePopup = document.querySelector('.name-popup');
+      const closeNamePopupButton = document.querySelector('.close-name-popup-button');
+      const submitButton = document.querySelector('.submit-button');
+
+      // Show the popup when Get Started button is clicked
+      getStartedButton.addEventListener('click', function () {
+        popup.classList.add('active');
+      });
+
+      // Close the popup when the Close button is clicked
+      closePopupButton.addEventListener('click', function () {
+        popup.classList.remove('active');
+      });
+
+      // Create Account button clicked
+      createAccountButton.addEventListener('click', function () {
+        popup.classList.remove('active');
+        namePopup.classList.add('active');
+      });
+
+      // Close Name popup when the Close button is clicked
+      closeNamePopupButton.addEventListener('click', function () {
+        namePopup.classList.remove('active');
+      });
+
+      // Handle form submission
+      submitButton.addEventListener('click', function (e) {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const university = document.getElementById('university').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const role = document.querySelector('input[name="role"]:checked').value;
+
+        if (!(name === "" || university === "" || email === "" || password === "")) {
+          namePopup.classList.remove('active');
+          const queryString = `?name=${encodeURIComponent(name)}&university=${encodeURIComponent(university)}&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
+        window.location.href = `forum.html${queryString}`;
+        }
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <a href="#" class="logo">AlumFin</a>
+      <ul class="navigation">
+        <li><a href="#about">About</a></li>
+        <li><a href="#problem">Problem Statement</a></li>
+        <li><a href="#headwinds">Headwinds</a></li>
+        <li><a href="#tailwinds">Tailwinds</a></li>
+        <li><a href="#competitors">Competitors</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Empowering Students Through Alumni-Supported Education Funding and Mentorship</h1>
+      <p class="tagline">Connecting students with alumni for financial aid and mentorship</p>
+      <a href="#" class="btn get-started-button">Get Started</a>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <div class="container">
+      <h2>About AlumFin</h2>
+      <p class="description">AlumFin is a platform that provides alumni-supported education funding and mentorship for college and higher-education students. We offer microfinancing options where students can connect with alumni, receive one-on-one verification, and secure student loans up to $5000 at lower interest rates. Additionally, students can connect with peers from similar backgrounds to gain valuable advice and guidance.</p>
+      <p class="mission">Our Mission: To empower students by connecting them with alumni for financial aid and mentorship.</p>
+    </div>
+  </section>
+
+  <section id="problem" class="section">
+    <div class="container">
+      <h2>Problem Statement</h2>
+      <p>There exists a lack of accessible and comprehensive support for students in higher education, including financial resources, career prospects, and mentorship opportunities. Furthermore, not having a clear communication channel with alumni inhibits prospective students from learning about the different support structures available to them.</p>
+    </div>
+  </section>
+
+  <section id="headwinds" class="section">
+    <div class="container">
+      <h2>Headwinds</h2>
+      <p>There are regulatory hurdles to set up a micro-financing company. It may also be challenging to compete with traditional banks and build credibility and trust. User adoption may be a hurdle too because it would require alumni engagement without significant incentive.</p>
+    </div>
+  </section>
+
+  <section id="tailwinds" class="section">
+    <div class="container">
+      <h2>Tailwinds</h2>
+      <p>Our startup addresses a pressing social issue by connecting alumni with students in need. This alignment with social impact resonates with individuals and organizations that prioritize philanthropy and education, creating support and interest.</p>
+    </div>
+  </section>
+
+  <section id="competitors" class="section">
+    <div class="container">
+      <h2>Competitors</h2>
+      <p>There exist both direct and indirect competitors within the micro-financing space for students, including SoFi (prominent in the lending market) and Earnest (specializing in loan refinancing). Traditional financial institutions exist as indirect competitors, as they differ in the aspect of personalized financing. Our product's emphasis on alumni mentorship allows for a unique method of micro-financing within the existing market.</p>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container">
+      <h2>Contact</h2>
+      <p>For any inquiries or to get in touch with us, please fill out the form below or reach out via the provided contact information.</p>
+
+      <form>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+
+        <input type="submit" value="Send Message">
+      </form>
+    </div>
+  </section>
+  
+  <div class="popup">
+    <div class="popup-content">
+      <h2>Welcome to AlumFin!</h2>
+      <p>Please select an option:</p>
+      <div class="popup-buttons">
+        <button class="create-account-button">Create Account</button>
+        <button class="sign-in-button">Sign In</button>
+      </div>
+      <button class="close-popup-button">Close</button>
+    </div>
+  </div>
+
+  <div class="popup name-popup">
+    <div class="popup-content">
+      <h2>Create Your Account</h2>
+      <p>Please select your role:</p>
+      <input type="radio" id="student" name="role" value="student" checked>
+      <label for="student">Student</label>
+      <input type="radio" id="alumni" name="role" value="alumni">
+      <label for="alumni">Alumni</label>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      <label for="university">University:</label>
+      <input type="text" id="university" name="university" required>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+      <button class="submit-button" disabled>Submit</button>
+      <button class="close-name-popup-button">Close</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2023 AlumFin. All rights reserved. | <a href="#contact">Contact Us</a></p>
+    </div>
+  </footer>
+</body>
+
+</html>

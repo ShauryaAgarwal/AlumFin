@@ -1,0 +1,351 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlumFin Forum</title>
+  <style>
+    /* CSS styles for the forum page */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f8f8;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      color: #333333;
+      margin: 0;
+      padding: 10px 0;
+    }
+
+    .navigation {
+      margin-bottom: 20px;
+      background-color: #f1f1f1;
+      border-radius: 5px;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navigation ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    .navigation ul li {
+      margin-right: 10px;
+    }
+
+    .navigation ul li a {
+      text-decoration: none;
+      color: #333333;
+      font-weight: bold;
+    }
+
+    .search-bar {
+      display: flex;
+    }
+
+    .search-bar input[type="text"] {
+      width: 200px;
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid #dddddd;
+    }
+
+    .search-bar button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    .content {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 5px;
+    }
+
+    .thread {
+      margin-bottom: 20px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+    }
+
+    .thread h2 {
+      margin: 0;
+      font-size: 20px;
+      color: #333333;
+    }
+
+    .thread p {
+      margin-top: 10px;
+      color: #555555;
+    }
+
+    .thread .author {
+      font-weight: bold;
+    }
+
+    .thread .date {
+      color: #888888;
+      font-size: 12px;
+    }
+
+    .reply-form {
+      margin-top: 20px;
+    }
+
+    .reply-form textarea {
+      width: 100%;
+      height: 100px;
+      padding: 5px;
+      border-radius: 5px;
+      resize: none;
+    }
+
+    .reply-form button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .new-thread-form {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+    }
+
+    .new-thread-form h2 {
+      margin: 0 0 20px;
+      font-size: 24px;
+      color: #333333;
+    }
+
+    .new-thread-form input[type="text"],
+    .new-thread-form textarea {
+      width: 100%;
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid #dddddd;
+      margin-bottom: 10px;
+    }
+
+    .new-thread-form button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>AlumFin Forum</h1>
+    </div>
+
+    <div class="navigation">
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="#">Categories</a></li>
+        <li><a href="#">Profile</a></li>
+        <li><a href="#">Log out</a></li>
+      </ul>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <button onclick="searchThreads()">Search</button>
+      </div>
+    </div>
+
+    <div class="content" id="threadList">
+      <!-- Existing threads -->
+
+      <div class="thread">
+        <h2>Thread Title 1</h2>
+        <p class="author">Posted by <span class="author">John Doe</span></p>
+        <p class="date">Posted on June 12, 2023</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <div class="replies">
+          <div class="reply">
+            <p class="author">Posted by <span class="author">Jane Smith</span></p>
+            <p class="date">Posted on June 13, 2023</p>
+            <p>Reply content goes here.</p>
+          </div>
+        </div>
+        <div class="reply-form">
+          <textarea placeholder="Reply to this thread..."></textarea>
+          <button onclick="addReply(this)">Submit Reply</button>
+        </div>
+      </div>
+
+      <div class="thread">
+        <h2>Thread Title 2</h2>
+        <p class="author">Posted by <span class="author">Jane Smith</span></p>
+        <p class="date">Posted on June 11, 2023</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <div class="replies">
+          <div class="reply">
+            <p class="author">Posted by <span class="author">John Doe</span></p>
+            <p class="date">Posted on June 14, 2023</p>
+            <p>Reply content goes here.</p>
+          </div>
+        </div>
+        <div class="reply-form">
+          <textarea placeholder="Reply to this thread..."></textarea>
+          <button onclick="addReply(this)">Submit Reply</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="new-thread-form">
+      <h2>Create New Thread</h2>
+      <input type="text" id="threadTitleInput" placeholder="Thread Title">
+      <textarea id="threadContentInput" placeholder="Thread Content"></textarea>
+      <button onclick="addThread()">Submit Thread</button>
+    </div>
+  </div>
+
+  <script>
+    function searchThreads() {
+      var input = document.getElementById("searchInput").value.toLowerCase();
+      var threads = document.getElementsByClassName("thread");
+
+      for (var i = 0; i < threads.length; i++) {
+        var thread = threads[i];
+        var title = thread.querySelector("h2").textContent.toLowerCase();
+
+        if (title.includes(input)) {
+          thread.style.display = "";
+        } else {
+          thread.style.display = "none";
+        }
+      }
+    }
+
+    function addReply(button) {
+      var replyForm = button.parentNode;
+      var replyContent = replyForm.querySelector("textarea").value;
+      var thread = replyForm.parentNode;
+      var repliesContainer = thread.querySelector(".replies");
+
+      if (replyContent.trim() !== "") {
+        var reply = document.createElement("div");
+        reply.classList.add("reply");
+
+        var author = document.createElement("p");
+        author.classList.add("author");
+        author.textContent = "Posted by Jane Smith";
+
+        var date = document.createElement("p");
+        date.classList.add("date");
+        date.textContent = "Posted on June 15, 2023";
+
+        var replyContentElem = document.createElement("p");
+        replyContentElem.textContent = replyContent;
+
+        reply.appendChild(author);
+        reply.appendChild(date);
+        reply.appendChild(replyContentElem);
+
+        repliesContainer.appendChild(reply);
+
+        replyForm.querySelector("textarea").value = "";
+      }
+    }
+
+    function addThread() {
+      var threadTitle = document.getElementById("threadTitleInput").value;
+      var threadContent = document.getElementById("threadContentInput").value;
+      var threadList = document.getElementById("threadList");
+
+      if (threadTitle.trim() !== "" && threadContent.trim() !== "") {
+        var thread = document.createElement("div");
+        thread.classList.add("thread");
+
+        var title = document.createElement("h2");
+        title.textContent = threadTitle;
+
+        var author = document.createElement("p");
+        author.classList.add("author");
+        author.textContent = "Posted by John Doe";
+
+        var date = document.createElement("p");
+        date.classList.add("date");
+        date.textContent = "Posted on June 16, 2023";
+
+        var content = document.createElement("p");
+        content.textContent = threadContent;
+
+        var replies = document.createElement("div");
+        replies.classList.add("replies");
+
+        var replyForm = document.createElement("div");
+        replyForm.classList.add("reply-form");
+
+        var replyTextarea = document.createElement("textarea");
+        replyTextarea.placeholder = "Reply to this thread...";
+
+        var replyButton = document.createElement("button");
+        replyButton.textContent = "Submit Reply";
+        replyButton.setAttribute("onclick", "addReply(this)");
+
+        replyForm.appendChild(replyTextarea);
+        replyForm.appendChild(replyButton);
+
+        thread.appendChild(title);
+        thread.appendChild(author);
+        thread.appendChild(date);
+        thread.appendChild(content);
+        thread.appendChild(replies);
+        thread.appendChild(replyForm);
+
+        threadList.appendChild(thread);
+
+        document.getElementById("threadTitleInput").value = "";
+        document.getElementById("threadContentInput").value = "";
+      }
+    }
+  </script>
+</body>
+
+</html>

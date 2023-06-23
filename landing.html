@@ -1,0 +1,70 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlumFin - Home</title>
+  <style>
+    /* CSS styles for the home landing screen */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px;
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    .welcome-message {
+      margin-bottom: 20px;
+    }
+
+    .status {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #3b8e3b;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Welcome to AlumFin!</h1>
+    <div class="welcome-message">
+      <h2 id="welcome-name"></h2>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript code to retrieve user data from the query string and update the welcome message
+    window.addEventListener('DOMContentLoaded', function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const name = urlParams.get('name');
+      const role = urlParams.get('role');
+
+      const welcomeNameElement = document.getElementById('welcome-name');
+      welcomeNameElement.textContent = `Welcome, ${name}!`;
+
+      const statusElement = document.createElement('div');
+      statusElement.classList.add('status');
+      statusElement.textContent = role === 'student' ? 'Student' : 'Alumni';
+
+      document.body.appendChild(statusElement);
+    });
+  </script>
+</body>
+
+</html>

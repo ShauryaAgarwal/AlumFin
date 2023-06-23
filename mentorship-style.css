@@ -1,0 +1,40 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #212121;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+main {
+  margin: 0;
+  padding: 0;
+}
+
+section {
+  margin-bottom: 20px;
+}
+
+h1, h2, h3 {
+  font-weight: bold;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+video {
+  max-width: 50%;
+}
+
+footer {
+  background-color: #212121;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}

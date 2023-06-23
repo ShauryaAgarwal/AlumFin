@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  background-color: #f2f2f2;
+  padding: 20px;
+  width: 200px;
+}
+
+.chat {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.chat h2 {
+  margin-top: 0;
+}
+
+.message-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.message {
+  margin-bottom: 10px;
+}
+
+.sender {
+  font-weight: bold;
+}
+
+.message-input {
+  margin-top: 20px;
+}
+
+.message-input input {
+  width: 70%;
+  padding: 5px;
+}
+
+.message-input button {
+  padding: 5px 10px;
+}

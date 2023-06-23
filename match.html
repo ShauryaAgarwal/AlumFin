@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AlumFin - Alum-Student Match</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>AlumFin - Alum-Student Match</h1>
+  </header>
+  
+  <main>
+    <div class="student-list">
+      <button class="prev-button" onclick="showPreviousPanel()">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <div class="student-panel">
+        <div class="student-info">
+          <img src="https://us.123rf.com/450wm/siamimages/siamimages1504/siamimages150400280/38412660-user-people-icon.jpg?ver=6" alt="Student 1 Profile Picture">
+          <div class="student-details">
+            <h2>Student Name 1</h2>
+            <p>Major: Computer Science</p>
+            <p>Year of Graduation: 2022</p>
+            <p>GPA: 3.9</p>
+          </div>
+        </div>
+        <div class="student-description">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum convallis vitae mauris non sagittis.</p>
+        </div>
+      </div>
+      
+      <div class="student-panel">
+        <div class="student-info">
+          <img src="https://www.clipartmax.com/png/middle/233-2334046_ic-account-box-48px-profile-picture-icon-square.png" alt="Student 2 Profile Picture">
+          <div class="student-details">
+            <h2>Student Name 2</h2>
+            <p>Major: Electrical Engineering</p>
+            <p>Year of Graduation: 2023</p>
+            <p>GPA: 3.7</p>
+          </div>
+        </div>
+        <div class="student-description">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum convallis vitae mauris non sagittis.</p>
+        </div>
+      </div>
+      
+      <!-- Add 6 more student panels -->
+      
+      <div class="student-panel">
+        <div class="student-info">
+          <img src="https://example.com/image-url-3.jpg" alt="Student 3 Profile Picture">
+          <div class="student-details">
+            <h2>Student Name 3</h2>
+            <p>Major: Biology</p>
+            <p>Year of Graduation: 2022</p>
+            <p>GPA: 3.5</p>
+          </div>
+        </div>
+        <div class="student-description">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum convallis vitae mauris non sagittis.</p>
+        </div>
+      </div>
+      
+      <div class="student-panel">
+        <div class="student-info">
+          <img src="https://example.com/image-url-4.jpg" alt="Student 4 Profile Picture">
+          <div class="student-details">
+            <h2>Student Name 4</h2>
+            <p>Major: Business Administration</p>
+            <p>Year of Graduation: 2023</p>
+            <p>GPA: 3.8</p>
+          </div>
+        </div>
+        <div class="student-description">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum convallis vitae mauris non sagittis.</p>
+        </div>
+      </div>
+      
+      <div class="student-panel">
+        <div class="student-info">
+          <img src="https://example.com/image-url-5.jpg" alt="Student 5 Profile Picture">
+          <div class="student-details">
+            <h2>Student Name 5</h2>
+            <p>Major: Psychology</p>
+            <p>Year of Graduation: 2022</p>
+            <p>GPA: 3.6</p>
+          </div>
+        </div>
+        <div class="student-description">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum convallis vitae mauris non sagittis.</p>
+        </div>
+      </div>
+      
+      <div class="student-panel">
+        <div class="student-info">
+          <img src="https://example.com/image-url-6.jpg" alt="Student 6 Profile Picture">
+          <div class="student-details">
+            <h2>Student Name 6</h2>
+            <p>Major: English Literature</p>
+            <p>Year of Graduation: 2023</p>
+            <p>GPA: 3.9</p>
+          </div>
+        </div>
+        <div class="student-description">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum convallis vitae mauris non sagittis.</p>
+        </div>
+      </div>
+      
+      <div class="student-panel">
+        <div class="student-info">
+          <img src="https://example.com/image-url-7.jpg" alt="Student 7 Profile Picture">
+          <div class="student-details">
+            <h2>Student Name 7</h2>
+            <p>Major: Chemistry</p>
+            <p>Year of Graduation: 2022</p>
+            <p>GPA: 3.7</p>
+          </div>
+        </div>
+        <div class="student-description">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum convallis vitae mauris non sagittis.</p>
+        </div>
+      </div>
+      <button class="next-button" onclick="showNextPanel()">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+    
+    <div class="toggle-buttons">
+      <button id="prevButton" onclick="showPreviousPanel()">Previous</button>
+      <button id="nextButton" onclick="showNextPanel()">Next</button>
+    </div>
+  </main>
+  
+  <script src="script.js"></script>
+</body>
+  
+
+</html>
