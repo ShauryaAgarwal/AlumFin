@@ -1,8 +1,103 @@
-<!DOCTYPE html>
 <html>
 <head>
   <title>AlumFin - Funding</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    .dashboard {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      background-color: #f2f2f2;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .dashboard-item {
+      flex-basis: 30%;
+      text-align: center;
+    }
+
+    .dashboard-item h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .student-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .student-panel {
+      background-color: #f2f2f2;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .student-panel:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      background: linear-gradient(45deg, rgba(0,0,0,0.3), rgba(0,0,0,0));
+      opacity: 0.5;
+      z-index: -1;
+    }
+
+    .student-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .student-info img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    .student-details h2 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .student-details p {
+      margin: 5px 0;
+    }
+
+    .funding-info p {
+      margin: 5px 0;
+    }
+  </style>
 </head>
 <body>
   <header>
