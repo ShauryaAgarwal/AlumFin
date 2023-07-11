@@ -320,8 +320,8 @@
       });
 
       // Handle form submission
-      submitButton.addEventListener('click', function (e) {
-        e.preventDefault();
+      submitButton.addEventListener('click', function (/*e*/) {
+        //e.preventDefault();
         const name = document.getElementById('name').value;
         const university = document.getElementById('university').value;
         const email = document.getElementById('email').value;
@@ -330,8 +330,22 @@
 
         if (!(name === "" || university === "" || email === "" || password === "")) {
           namePopup.classList.remove('active');
-          const queryString = `?name=${encodeURIComponent(name)}&university=${encodeURIComponent(university)}&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
-        window.location.href = `forum.html${queryString}`;
+          pool.query(
+            'INSERT INTO users (name, university, email, password, role) VALUES ($1, $2, $3, $4, $5)',
+            [name, university, email, password, role],
+            (error, results) => {
+              if (error) {
+                console.error('Error inserting user data:', error);
+                // Handle the error condition (e.g., display an error message)
+              } else {
+                console.log('User data inserted successfully');
+                // Redirect the user to a success page
+                window.location.href = 'forum.html';
+              }
+            }
+          );
+          //const queryString = `?name=${encodeURIComponent(name)}&university=${encodeURIComponent(university)}&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
+          //window.location.href = `forum.html${queryString}`;
         }
       });
     });
