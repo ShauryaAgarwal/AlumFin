@@ -4,485 +4,1028 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AlumFin | Connecting Students and Alumni</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   <style>
-    /* Global Styles */
+    /* Font */
+    @import url("https://fonts.cdnfonts.com/css/din-alternate");
+    @import url("https://fonts.googleapis.com/css?family=Heebo");
+    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+    
     body {
-      font-family: Arial, sans-serif;
+      font-family: "DIN Alternate", sans-serif;
+    }
+    
+    /* Reset default styles */
+    * {
       margin: 0;
       padding: 0;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    /* Header */
-    header {
-      background-color: #333;
-      color: #fff;
-    }
-
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-      color: #fff;
-      text-decoration: none;
-    }
-
-    .navigation {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .navigation li {
-      display: inline-block;
-      margin-left: 20px;
-    }
-
-    .navigation li a {
-      color: #fff;
-      text-decoration: none;
-    }
-
-    /* Hero Section */
-    .hero {
-      background-color: #f1f1f1;
-      padding: 80px 0;
-      text-align: center;
-    }
-
-    .hero h1 {
-      font-size: 48px;
-      margin-bottom: 20px;
-    }
-
-    .tagline {
-      font-size: 24px;
-      color: #333;
-      margin-bottom: 40px;
-    }
-
-    .btn {
-      display: inline-block;
-      background-color: #333;
-      color: #fff;
-      padding: 12px 24px;
-      text-decoration: none;
-      border-radius: 4px;
-      transition: background-color 0.3s ease;
-    }
-
-    .btn:hover {
-      background-color: #555;
-    }
-    
-    .button {
-      display: inline-block;
-      padding: 10px 20px;
-      font-size: 16px;
-      text-align: center;
-      text-decoration: none;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .button:hover {
-      background-color: #45a049;
-    }
-
-    /* Section Styles */
-    .section {
-      padding: 60px 0;
-    }
-
-    .section h2 {
-      font-size: 36px;
-      margin-bottom: 20px;
-    }
-
-    .section p {
-      margin-bottom: 20px;
-    }
-
-    /* Footer Styles */
-    footer {
-      background-color: #333;
-      color: #fff;
-      text-align: center;
-      padding: 20px 0;
-    }
-
-    footer a {
-      color: #fff;
-      text-decoration: none;
-    }
-
-    /* Popup Styles */
-    .popup {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-      visibility: hidden;
-      opacity: 0;
-      transition: visibility 0s, opacity 0.3s;
-    }
-
-    .popup.active {
-      visibility: visible;
-      opacity: 1;
-    }
-
-    .popup-content {
-      background-color: #fff;
-      padding: 40px;
-      max-width: 400px;
-      text-align: center;
-      border-radius: 8px;
-    }
-
-    .popup-buttons {
-      display: flex;
-      justify-content: center;
-      margin-top: 20px;
-    }
-
-    .popup-buttons button {
-      margin: 0 10px;
-      padding: 10px 20px;
-      border-radius: 4px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .popup-buttons .create-account-button {
-      background-color: green;
-      color: #fff;
-    }
-
-    .popup-buttons .sign-in-button {
-      background-color: blue;
-      color: #fff;
-    }
-    
-    .close-popup-button {
-      background-color: transparent;
-      border: none;
-      color: #333;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-
-    .close-popup-button:hover {
-      color: #555;
-    }
-    
-    /* Name Popup Styles */
-    .name-popup {
-      display: none;
-    }
-
-    .name-popup.active {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      z-index: 999;
-    }
-    
-    .name-popup-content {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 4px;
-      max-width: 400px;
-      text-align: center;
-    }
-
-    .name-popup h2 {
-      margin-top: 0;
-    }
-
-    .name-popup label {
-      display: block;
-      font-weight: bold;
-      margin-top: 20px;
-    }
-
-    .name-popup input[type="text"],
-    .name-popup input[type="email"],
-    .name-popup input[type="password"] {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
       box-sizing: border-box;
     }
-
-    .name-popup input[type="radio"] {
-      margin-right: 5px;
+    
+    /* Global Styles */
+    body {
+      background-color: #fff;
     }
-
-    .submit-button {
-      background-color: green;
+    
+    /* Navigation */
+    .top-nav {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #fff;
       color: #fff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 4px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    
+    .logo img {
+      height: 70px;
+      margin-left: 10px;
+      margin-right: 15px;
       margin-top: 20px;
-      font-size: 16px;
+      margin-bottom: 25px;
+      vertical-align: middle;
+    }
+    
+    .menu {
+      list-style-type: none;
+      display: flex;
+      flex-direction: row;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .menu a {
+      margin-bottom: 20px;
+      padding-left: 15px;
+      padding-right: 15px;
+      margin-left: 10px;
+      padding-top: 40px;
+      padding-bottom: 15px;
+      overflow: hidden;
+      text-decoration: none;
+      color: black;
+      font-family: "Arial";
+      font-weight: 700;
+      font-style: normal;
+      font-size: 24px;
+      position: relative;
+    }
+    
+    .menu a::after {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      width: 0%;
+      content: ".";
+      color: transparent;
+      background: #000;
+      height: 1px;
+      transition: all 0.5s;
+    }
+    
+    .menu a:hover::after {
+      width: 50%;
+    }
+    
+    .menu-button-container {
+      display: none;
+      height: 100%;
+      width: 35px;
+      cursor: pointer;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    #menu-toggle {
+      position: absolute;
+      display: block;
+      height: 35px;
+      width: 35px;
+      top: 27px;
+      right: 20px;
+      z-index: 5;
+      opacity: 0;
       cursor: pointer;
     }
     
-    .submit-button:disabled {
-      background-color: gray;
-      cursor: not-allowed;
-    }
-
-    .submit-button:hover {
-      background-color: #3b8e3b;
+    .menu-button,
+    .menu-button::before,
+    .menu-button::after {
+      display: block;
+      background-color: black;
+      position: absolute;
+      height: 4px;
+      width: 35px;
+      transition: transform 500ms cubic-bezier(0.14, 0.63, 0.35, 0.88);
+      border-radius: 2px;
     }
     
-    /* Temporary Navigation Menu */
-    .top-menu {
-      background-color: #333333;
-      padding: 10px;
+    .menu-button::before {
+      content: "";
+      margin-top: -8px;
     }
-
-    .top-menu ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
+    
+    .menu-button::after {
+      content: "";
+      margin-top: 8px;
     }
-
-    .top-menu li {
-      display: inline-block;
-      margin-right: 10px;
+    
+    #menu-toggle:checked + .menu-button-container .menu-button::before {
+      margin-top: 0px;
+      transform: rotate(225deg);
     }
-
-    .top-menu li a {
-      color: #ffffff;
+    
+    #menu-toggle:checked + .menu-button-container .menu-button {
+      background: rgba(255, 255, 255, 0);
+    }
+    
+    #menu-toggle:checked + .menu-button-container .menu-button::after {
+      margin-top: 0px;
+      transform: rotate(-225deg);
+    }
+    
+    @media (max-width: 1100px) {
+      .menu-button-container {
+        display: flex;
+      }
+    
+      .menu {
+        position: absolute;
+        top: 0;
+        margin-top: 100px;
+        left: 0;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+      }
+    
+      #menu-toggle ~ .menu a {
+        height: 0;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        transition: height 300ms cubic-bezier(0.23, 1, 0.32, 1);
+      }
+    
+      #menu-toggle:checked ~ .menu a {
+        border: 1px solid #808080;
+        height: 3em;
+        padding: 0.75em;
+        transition: height 300ms cubic-bezier(0.23, 1, 0.32, 1);
+      }
+    
+      .menu > a {
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        padding: 0.5em 0;
+        width: 100%;
+        color: black;
+        background-color: #d3d3d3;
+      }
+    
+      .menu > a:not(:last-child) {
+        border-bottom: 1px solid #444;
+      }
+    }
+    
+    /* Hero Section Styles */
+    .hero-section {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding-left: 50px;
+      padding-right: 50px;
+      background-color: #fff;
+      position: relative;
+    }
+    
+    .section-one,
+    .section-two {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 25px;
+      padding-bottom: 55px;
+      margin-left: 35px;
+      margin-right: 35px;
+    }
+    
+    @media screen and (max-width: 1100px) {
+      .hero-section {
+        flex-direction: column;
+      }
+    }
+    
+    .text-container {
+      text-align: left;
+    }
+    
+    .text-container img {
+      margin-left: -25px;
+    }
+    
+    .main-text {
+      width: 400px;
+    }
+    
+    .main-text span {
+      color: black;
+      font-size: 60px;
+      font-weight: 700;
+    }
+    
+    .legacy-text {
+      font-size: 60px;
+      font-family: "Heebo";
+      text-shadow: 0px 1px, 0px 1px, 1px 1px;
+      font-weight: 700;
+      line-height: 0px;
+    }
+    
+    .sub-text {
+      font-size: 28px;
+      color: black;
+      margin-bottom: 20px;
+      padding-top: 15px;
+    }
+    
+    .circle {
+      width: 360px;
+      height: 300px;
+      flex-shrink: 0;
+      border-radius: 25px;
+      margin-top: 35px;
+      margin-left: 25px;
+      position: relative;
+      background: radial-gradient(
+        63.41% 63.41% at 50% 60.93%,
+        #00ff38 0%,
+        #c7ffd3 100%
+      );
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+      z-index: 0;
+    }
+    
+    .alum-center-text {
+      width: 300px;
+      height: 45px;
+      left: 34px;
+      top: 24px;
+      position: absolute;
+      text-align: center;
+      color: black;
+      font-size: 21px;
+      font-family: DIN Alternate;
+      font-weight: 700;
+      word-wrap: break-word;
+    }
+    
+    .alumni-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 250px;
+      height: 65px;
+      position: absolute;
+      left: 55px;
+      top: 90px;
+      background: #3300ff;
+      border-radius: 15px;
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.5));
+      color: white;
+      font-size: 35px;
+      font-family: DIN Alternate;
+      font-weight: 700;
       text-decoration: none;
-      padding: 5px 10px;
+      transition: 0.3s;
+    }
+    
+    .student-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 250px;
+      height: 65px;
+      position: absolute;
+      left: 55px;
+      top: 185px;
+      background: #3300ff;
+      border-radius: 15px;
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.5));
+      color: white;
+      font-size: 35px;
+      font-family: DIN Alternate;
+      font-weight: 700;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    
+    .alumni-button:hover,
+    .student-button:hover {
+      background: white;
+      color: #3300ff;
+      filter: drop-shadow(0px 7px 7px rgba(0, 0, 0, 0.75));
+    }
+    
+    .section-two img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    @media screen and (max-width: 500px) {
+      .text-container img {
+        width: 80%;
+        margin-left: 35px;
+      }
+    
+      .main-text {
+        width: 320px;
+        margin-left: 40px;
+      }
+    
+      .main-text span {
+        font-size: 45px;
+      }
+    
+      .sub-text {
+        font-size: 20px;
+        margin-left: 40px;
+      }
+    
+      .circle {
+        width: 288px;
+        height: 240px;
+        margin-left: 40px;
+      }
+    
+      .alum-center-text {
+        width: 240px;
+        height: 45px;
+        left: 27px;
+        top: 19px;
+        font-size: 17px;
+      }
+    
+      .alumni-button {
+        width: 200px;
+        height: 52px;
+        left: 44px;
+        top: 72px;
+        font-size: 28px;
+      }
+    
+      .student-button {
+        width: 200px;
+        height: 52px;
+        left: 44px;
+        top: 148px;
+        font-size: 28px;
+      }
+    
+      .section-two img {
+        width: 135%;
+        height: 135%;
+        object-fit: cover;
+      }
+    }
+    
+    /* Login and Registration */
+    .form-wrapper {
+      position: absolute;
+      width: 400px;
+      height: 440px;
+      background: transparent;
+      border: 2px solid rgba(0, 0, 0, 0.5);
+      border-radius: 20px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      transform: scale(0);
+      transition: transform 0.5s ease, height 0.2s ease;
+    }
+    
+    .form-wrapper.active-alumni-popup {
+      transform: scale(1);
+    }
+    
+    .form-wrapper.active-student-popup {
+      transform: scale(1);
+    }
+    
+    .form-wrapper.active-registration {
+      height: 650px;
+    }
+    
+    .form-wrapper .form-box {
+      width: 100%;
+      padding: 40px;
+    }
+    
+    .form-wrapper .form-box.login {
+      transition: transform 0.18s ease;
+      transform: translateX(0);
+    }
+    
+    .form-wrapper.active-registration .form-box.login {
+      transition: none;
+      transform: translateX(-400px);
+    }
+    
+    .form-wrapper .form-box.register {
+      position: absolute;
+      transition: none;
+      transform: translateX(400px);
+    }
+    
+    .form-wrapper.active-registration .form-box.register {
+      transition: transform 0.18s ease;
+      transform: translateX(0);
+    }
+    
+    .form-wrapper .icon-close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 45px;
+      height: 45px;
+      background: #162938;
+      font-size: 32px;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom-left-radius: 20px;
+      cursor: pointer;
+      z-index: 1;
+    }
+    
+    .form-box h2 {
+      font-size: 32px;
+      color: #162938;
+      text-align: center;
+    }
+    
+    .input-box {
+      position: relative;
+      width: 100%;
+      height: 50px;
+      border-bottom: 2px solid #162938;
+      margin: 30px 0;
+    }
+    
+    .input-box label {
+      position: absolute;
+      top: 50%;
+      left: 5px;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: #162938;
+      font-weight: 500;
+      pointer-events: none;
+      transition: 0.5s;
+    }
+    
+    .input-box input:focus ~ label,
+    .input-box input:valid ~ label {
+      top: -5px;
+    }
+    
+    .input-box input {
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      color: #162938;
+      font-weight: 600;
+      padding: 0 35px 0 5px;
+    }
+    
+    .input-box .icon {
+      position: absolute;
+      right: 8px;
+      font-size: 20px;
+      color: #162938;
+      line-height: 57px;
+    }
+    
+    .remember-forgot {
+      font-size: 16px;
+      color: #162938;
+      font-weight: 500;
+      margin: -15px 0 15px;
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .remember-forgot label input {
+      accent-color: #162938;
+      margin-right: 3px;
+    }
+    
+    .remember-forgot a {
+      color: #162938;
+      text-decoration: none;
+    }
+    
+    .remember-forgot a:hover {
+      text-decoration: underline;
+    }
+    
+    .agree-terms {
+      font-size: 16px;
+      color: #162938;
+      font-weight: 500;
+      margin: -15px 0 15px;
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .agree-terms label input {
+      accent-color: #162938;
+      margin-right: 3px;
+    }
+    
+    .submit-form-button {
+      width: 100%;
+      height: 45px;
+      background: #162938;
+      border: none;
+      outline: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      color: #fff;
+      font-weight: 500;
+    }
+    
+    .login-register {
+      font-size: 16px;
+      color: #162938;
+      text-align: center;
+      font-weight: 500;
+      margin: 25px 0 10px;
+    }
+    
+    .login-register p a {
+      color: #162938;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .login-register p a:hover {
+      text-decoration: underline;
+    }
+    
+    @media screen and (max-width: 500px) {
+      .form-wrapper.active-alumni-popup {
+        transform: scale(0.85);
+      }
+    
+      .form-wrapper.active-student-popup {
+        transform: scale(0.85);
+      }
+    }
+    
+    /* About Us Section */
+    .section-title {
+      font-size: 36px;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 20px;
+    }
+    
+    .about-us-section {
+      text-align: center;
+      padding: 50px 0;
+      background-color: #efefef;
+    }
+    
+    .about-us-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding-left: 25px;
+      padding-right: 25px;
+    }
+    
+    .about-us-text {
+      font-size: 20px;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    .about-us-mission {
+      font-size: 24px;
+      font-weight: bold;
+      color: #000;
+      margin-top: 20px;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      /* background: linear-gradient(to right, #c7ffd3, #00ff38, #c7ffd3); */
+      /* background-color: #08fc3c; */
+      background-color: #3300ff;
+      color: #fff;
+      font-size: 28px;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 15px 20px;
+      border-radius: 20px;
+      margin-top: 25px;
+      filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.5));
+      transition: 0.3s;
+    }
+    
+    .cta-button:hover {
+      background: #fff;
+      color: #3300ff;
+      filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.75));
+    }
+    
+    /* Services Section */
+    .services-section {
+      text-align: center;
+      padding: 50px 0;
+    }
+    
+    .services-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .service-item {
+      max-width: 350px;
+      padding: 20px;
+      margin: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+    }
+    
+    .service-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      padding-bottom: 10px;
+    }
+    
+    .service-description {
+      font-size: 16px;
+      color: #666;
+      line-height: 1.6;
+    }
+    
+    /* Mentorship Section */
+    .mentorship-section {
+      text-align: center;
+      padding: 50px 0;
+      background-color: #efefef;
+    }
+    
+    .mentorship-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .mentorship-item {
+      max-width: 350px;
+      padding: 20px;
+      margin: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+    }
+    
+    .mentorship-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      padding-bottom: 10px;
+    }
+    
+    .mentorship-description {
+      font-size: 16px;
+      color: #666;
+      line-height: 1.6;
+    }
+    
+    /* How It Works Section */
+    .how-it-works-section {
+      text-align: center;
+      padding: 50px 0;
+    }
+    
+    .how-it-works-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding-left: 25px;
+      padding-right: 25px;
+    }
+    
+    .how-it-works-text {
+      font-size: 22px;
+      color: #000;
+      line-height: 1.6;
+    }
+    
+    .how-it-works-steps {
+      text-align: left;
+      list-style: decimal;
+      margin-top: 35px;
+      margin-bottom: 35px;
+      padding-left: 40px;
+    }
+    
+    .how-it-works-steps li {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 15px;
+    }
+    
+    /* Professional Footer Section */
+    .footer-section {
+      text-align: center;
+      padding: 20px 0;
+      background-color: #333;
+      color: #fff;
+    }
+    
+    .footer-links {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    
+    .footer-links li {
+      margin: 0 15px;
+    }
+    
+    .footer-links li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+    }
+    
+    .social-media-icons {
+      display: flex;
     }
   </style>
-  
   <script>
-    // JavaScript for handling the popup functionality
-    window.addEventListener('DOMContentLoaded', function () {
-      const getStartedButton = document.querySelector('.get-started-button');
-      const popup = document.querySelector('.popup');
-      const closePopupButton = document.querySelector('.close-popup-button');
-      const createAccountButton = document.querySelector('.create-account-button');
-      const signInButton = document.querySelector('.sign-in-button');
-      const namePopup = document.querySelector('.name-popup');
-      const closeNamePopupButton = document.querySelector('.close-name-popup-button');
-      const submitButton = document.querySelector('.submit-button');
-
-      // Show the popup when Get Started button is clicked
-      getStartedButton.addEventListener('click', function () {
-        popup.classList.add('active');
-      });
-
-      // Close the popup when the Close button is clicked
-      closePopupButton.addEventListener('click', function () {
-        popup.classList.remove('active');
-      });
-
-      // Create Account button clicked
-      createAccountButton.addEventListener('click', function () {
-        popup.classList.remove('active');
-        namePopup.classList.add('active');
-      });
-
-      // Close Name popup when the Close button is clicked
-      closeNamePopupButton.addEventListener('click', function () {
-        namePopup.classList.remove('active');
-      });
-
-      // Handle form submission
-      submitButton.addEventListener('click', function (/*e*/) {
-        //e.preventDefault();
-        const name = document.getElementById('name').value;
-        const university = document.getElementById('university').value;
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const role = document.querySelector('input[name="role"]:checked').value;
-
-        if (!(name === "" || university === "" || email === "" || password === "")) {
-          namePopup.classList.remove('active');
-          pool.query(
-            'INSERT INTO users (name, university, email, password, role) VALUES ($1, $2, $3, $4, $5)',
-            [name, university, email, password, role],
-            (error, results) => {
-              if (error) {
-                console.error('Error inserting user data:', error);
-                // Handle the error condition (e.g., display an error message)
-              } else {
-                console.log('User data inserted successfully');
-                // Redirect the user to a success page
-                window.location.href = 'forum.html';
-              }
-            }
-          );
-          //const queryString = `?name=${encodeURIComponent(name)}&university=${encodeURIComponent(university)}&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
-          //window.location.href = `forum.html${queryString}`;
-        }
-      });
+    const formWrapper = document.querySelector(".form-wrapper");
+    const loginLink = document.querySelector(".login-link");
+    const registerLink = document.querySelector(".register-link");
+    const alumniPopup = document.querySelector(".alumni-button");
+    const studentPopup = document.querySelector(".student-button");
+    const iconClose = document.querySelector(".icon-close");
+    
+    registerLink.addEventListener("click", () => {
+      formWrapper.classList.add("active-registration");
+    });
+    
+    loginLink.addEventListener("click", () => {
+      formWrapper.classList.remove("active-registration");
+    });
+    
+    alumniPopup.addEventListener("click", () => {
+      formWrapper.classList.add("active-alumni-popup");
+    });
+    
+    studentPopup.addEventListener("click", () => {
+      formWrapper.classList.add("active-student-popup");
+    });
+    
+    iconClose.addEventListener("click", () => {
+      formWrapper.classList.remove("active-alumni-popup");
+      formWrapper.classList.remove("active-student-popup");
+      formWrapper.classList.remove("active-registration");
     });
   </script>
 </head>
 
 <body>
-  <!-- Temporary Navigation Menu -->
-  <div class="top-menu">
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="forum.html">Forum</a></li>
-      <li><a href="chat.html">Chat</a></li>
-      <li><a href="match.html">Match</a></li>
-      <li><a href="funding.html">Funding</a></li>
-      <li><a href="mentorship.html">Mentorship</a></li>
+  <!-- Navigation -->
+  <section class="top-nav">
+    <div class="logo">
+      <img src="https://cdn.discordapp.com/attachments/1111068462937284728/1135434118281297920/AlumFin_Header_Logo.png" alt="AlumFin Logo">
+    </div>
+    <input id="menu-toggle" type="checkbox" />
+    <label class='menu-button-container' for="menu-toggle">
+      <div class='menu-button'></div>
+    </label>
+    <ul class="menu">
+      <a href="index.html">Home</a>
+      <a href="forum.html">Forum</a>
+      <a href="chat.html">Chat</a>
+      <a href="match.html">Match</a>
+      <a href="funding.html">Funding</a>
+      <a href="mentorship.html">Mentorship</a>
+      <a href="contact.html">Contact</a>
     </ul>
-  </div>
-  
-  <header>
-    <div class="container">
-      <a href="#" class="logo">AlumFin</a>
-      <ul class="navigation">
-        <li><a href="#about">About</a></li>
-        <li><a href="#problem">Problem Statement</a></li>
-        <li><a href="#headwinds">Headwinds</a></li>
-        <li><a href="#tailwinds">Tailwinds</a></li>
-        <li><a href="#competitors">Competitors</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </header>
-
-  <section class="hero">
-    <div class="container">
-      <h1>Empowering Students Through Alumni-Supported Education Funding and Mentorship</h1>
-      <p class="tagline">Connecting students with alumni for financial aid and mentorship</p>
-      <a href="#" class="btn get-started-button">Get Started</a>
-      <br><br>
-      <button class="button" onclick="window.open('https://join.slack.com/t/alumfin/shared_invite/zt-1yaun2i9f-uLOBPSz20m6WTAEmItx_pA', '_blank')">Join Our Slack!</button>
-    </div>
   </section>
 
-  <section id="about" class="section">
-    <div class="container">
-      <h2>About AlumFin</h2>
-      <p class="description">AlumFin is a platform that provides alumni-supported education funding and mentorship for college and higher-education students. We offer microfinancing options where students can connect with alumni, receive one-on-one verification, and secure student loans up to $5000 at lower interest rates. Additionally, students can connect with peers from similar backgrounds to gain valuable advice and guidance.</p>
-      <p class="mission">Our Mission: To empower students by connecting them with alumni for financial aid and mentorship.</p>
-    </div>
-  </section>
-
-  <section id="problem" class="section">
-    <div class="container">
-      <h2>Problem Statement</h2>
-      <p>There exists a lack of accessible and comprehensive support for students in higher education, including financial resources, career prospects, and mentorship opportunities. Furthermore, not having a clear communication channel with alumni inhibits prospective students from learning about the different support structures available to them.</p>
-    </div>
-  </section>
-
-  <section id="headwinds" class="section">
-    <div class="container">
-      <h2>Headwinds</h2>
-      <p>There are regulatory hurdles to set up a micro-financing company. It may also be challenging to compete with traditional banks and build credibility and trust. User adoption may be a hurdle too because it would require alumni engagement without significant incentive.</p>
-    </div>
-  </section>
-
-  <section id="tailwinds" class="section">
-    <div class="container">
-      <h2>Tailwinds</h2>
-      <p>Our startup addresses a pressing social issue by connecting alumni with students in need. This alignment with social impact resonates with individuals and organizations that prioritize philanthropy and education, creating support and interest.</p>
-    </div>
-  </section>
-
-  <section id="competitors" class="section">
-    <div class="container">
-      <h2>Competitors</h2>
-      <p>There exist both direct and indirect competitors within the micro-financing space for students, including SoFi (prominent in the lending market) and Earnest (specializing in loan refinancing). Traditional financial institutions exist as indirect competitors, as they differ in the aspect of personalized financing. Our product's emphasis on alumni mentorship allows for a unique method of micro-financing within the existing market.</p>
-    </div>
-  </section>
-
-  <section id="contact" class="section">
-    <div class="container">
-      <h2>Contact</h2>
-      <p>For any inquiries or to get in touch with us, please fill out the form below or reach out via the provided contact information.</p>
-
-      <form>
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" required>
-
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="4" required></textarea>
-
-        <input type="submit" value="Send Message">
-      </form>
-    </div>
-  </section>
-  
-  <div class="popup">
-    <div class="popup-content">
-      <h2>Welcome to AlumFin!</h2>
-      <p>Please select an option:</p>
-      <div class="popup-buttons">
-        <button class="create-account-button">Create Account</button>
-        <button class="sign-in-button">Sign In</button>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="section-one">
+      <div class="text-container">
+        <img src="https://cdn.discordapp.com/attachments/1111068462937284728/1134773662168404048/AlumFin_Hero_Dots.png">
+        <div class="main-text">
+          <span>Build a </span>
+          <span class="legacy-text" style="color: #3300FF">Legacy</span>
+          <span>of Success</span>
+        </div>
+        <p class="sub-text">Students Today, Alumni Tomorrow.</p>
+        <div class="circle">
+          <div class="alum-center-text">I’m a(n):</div>
+          <a href="#" class="alumni-button">Alumni</a>
+          <a href="#" class="student-button">Student</a>
+        </div>
       </div>
-      <button class="close-popup-button">Close</button>
     </div>
-  </div>
-
-  <div class="popup name-popup">
-    <div class="popup-content">
-      <h2>Create Your Account</h2>
-      <p>Please select your role:</p>
-      <input type="radio" id="student" name="role" value="student" checked>
-      <label for="student">Student</label>
-      <input type="radio" id="alumni" name="role" value="alumni">
-      <label for="alumni">Alumni</label>
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required>
-      <label for="university">University:</label>
-      <input type="text" id="university" name="university" required>
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required>
-      <button class="submit-button">Submit</button>
-      <button class="close-name-popup-button">Close</button>
+    <div class="section-two">
+      <img src="https://cdn.discordapp.com/attachments/1111068462937284728/1134664198585077884/AlumFin_Hero_Image.png" alt="AlumFin Hero Image">
     </div>
-  </div>
+    <div class="form-wrapper">
+      <span class="icon-close">
+        <ion-icon name="close"></ion-icon>
+      </span>
+      <div class="form-box login">
+        <h2>Login</h2>
+        <form action="#">
+          <div class="input-box">
+            <span class="icon">
+              <ion-icon name="mail"></ion-icon>
+            </span>
+            <input type="email" required>
+            <label>Email</label>
+          </div>
+          <div class="input-box">
+            <span class="icon">
+              <ion-icon name="lock-closed"></ion-icon>
+            </span>
+            <input type="password" required>
+            <label>Password</label>
+          </div>
+          <div class="remember-forgot">
+            <label><input type="checkbox">Remember me</label>
+            <a href="#">Forgot Password?</a>
+          </div>
+          <button type="submit" class="submit-form-button">Login</button>
+          <div class="login-register">
+            <p>Don't have an account? <a href="#" class="register-link">Register</a></p>
+          </div>
+        </form>
+      </div>
+      <div class="form-box register">
+        <h2>Registration</h2>
+        <form action="#">
+          <div class="input-box">
+            <span class="icon">
+              <ion-icon name="person"></ion-icon>
+            </span>
+            <input type="text" required>
+            <label>Full Name</label>
+          </div>
+          <div class="input-box">
+            <span class="icon">
+              <ion-icon name="mail"></ion-icon>
+            </span>
+            <input type="email" required>
+            <label>Email</label>
+          </div>
+          <div class="input-box">
+            <span class="icon">
+              <ion-icon name="lock-closed"></ion-icon>
+            </span>
+            <input type="password" required>
+            <label>Password</label>
+          </div>
+          <div class="input-box">
+            <span class="icon">
+              <ion-icon name="school"></ion-icon>
+            </span>
+            <input type="text" required>
+            <label>Institution</label>
+          </div>
+          <div class="input-box">
+            <span class="icon">
+              <ion-icon name="calendar"></ion-icon>
+            </span>
+            <input type="text" required>
+            <label>Graduation Year</label>
+          </div>
+          <div class="agree-terms">
+            <label><input type="checkbox" required>I agree to the terms & conditions</label>
+          </div>
+          <button type="submit" class="submit-form-button">Register</button>
+          <div class="login-register">
+            <p>Already have an account? <a href="#" class="login-link">Login</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
 
-  <footer>
-    <div class="container">
-      <p>&copy; 2023 AlumFin. All rights reserved. | <a href="#contact">Contact Us</a></p>
+  <!-- About Us Section -->
+  <section class="about-us-section">
+    <div class="section-title">About Us</div>
+    <div class="about-us-content">
+      <p class="about-us-text">AlumFin is a platform that provides alumni-supported education funding and mentorship for college and higher-education students. We offer microfinancing options where students can connect with alumni, receive one-on-one verification, and secure student loans up to $5000 at lower interest rates. Additionally, students can connect with peers from similar backgrounds to gain valuable advice and guidance.</p>
+      <p class="about-us-mission"><strong>Company Mission:</strong> We empower students by connecting them with alumni for financial aid and mentorship.</p>
+      <a class="cta-button" href="https://join.slack.com/t/alumfin/shared_invite/zt-1yaun2i9f-uLOBPSz20m6WTAEmItx_pA" target="_blank">Join Our Slack!</a>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services-section">
+    <div class="section-title">Services</div>
+    <div class="services-content">
+      <div class="service-item">
+        <h3 class="service-title">Microfinancing Options</h3>
+        <p class="service-description">At AlumFin, we offer a range of microfinancing options tailored to meet the specific needs of college and higher-education students. By connecting with our vast network of supportive alumni, students can access funding opportunities that pave the way to a brighter future. Our microfinancing options come with numerous benefits, including flexible repayment plans, lower interest rates, and personalized financial guidance. Whether you need assistance with tuition fees, textbooks, or other educational expenses, AlumFin is here to bridge the gap and empower you on your academic journey.</p>
+      </div>
+      <div class="service-item">
+        <h3 class="service-title">One-on-One Verification</h3>
+        <p class="service-description">At AlumFin, transparency and security are our top priorities. We understand the importance of ensuring that both students and alumni have a trustworthy platform for financial interactions. To achieve this, we implement a rigorous one-on-one verification process. This process involves direct communication between students and alumni, fostering trust and confidence in the funding and mentorship relationships. Through verified interactions, students can rest assured that they are connecting with genuine alumni, while alumni can confidently support the next generation of aspiring scholars.</p>
+      </div>
+      <div class="service-item">
+        <h3 class="service-title">Lower Interest Rates</h3>
+        <p class="service-description">One of the key advantages of choosing AlumFin for your student loans is our commitment to providing lower interest rates. Unlike traditional lenders, we prioritize the well-being of our students, which is why we offer competitive interest rates designed to ease the burden of loan repayment. By partnering with our alumni network, we create a supportive ecosystem that enables us to offer favorable loan terms. With AlumFin, you can embark on your educational journey with financial peace of mind, knowing that you are not burdened by exorbitant interest rates.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mentorship Section -->
+  <section class="mentorship-section">
+    <div class="section-title">Mentorship</div>
+    <div class="mentorship-content">
+      <div class="mentorship-item">
+        <h3 class="mentorship-title">Mentorship Benefits</h3>
+        <p class="mentorship-description">Connecting with alumni mentors through AlumFin opens doors to an array of invaluable benefits. Our experienced professionals are eager to share their knowledge and insights, providing personalized guidance and mentorship to students. By fostering these meaningful connections, students gain access to a wealth of industry-specific knowledge, career advice, and personal development opportunities. Our mentorship program is designed to empower students with the confidence, skills, and networks needed to succeed academically and professionally.</p>
+      </div>
+      <div class="mentorship-item">
+        <h3 class="mentorship-title">Peer Support</h3>
+        <p class="mentorship-description">At AlumFin, we recognize the significance of peer support in shaping a student's educational journey. By connecting with peers from similar backgrounds, students gain a sense of community and belonging. Our platform encourages networking and collaboration among students, fostering an environment where valuable advice and support are readily available. Building relationships with peers who share similar aspirations and challenges can be instrumental in overcoming obstacles and achieving academic excellence.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="how-it-works-section">
+    <div class="section-title">How It Works</div>
+    <div class="how-it-works-content">
+      <p class="how-it-works-text">
+        Applying for microfinancing, connecting with alumni, and accessing mentorship through AlumFin is a straightforward and intuitive process. Here's a step-by-step guide to getting started:
+      </p>
+      <ol class="how-it-works-steps">
+        <li>Sign Up: Create an account on the AlumFin website by providing your essential details and academic background.</li>
+        <li>Explore Microfinancing Options: Browse through the various microfinancing opportunities available and choose the one that aligns with your educational needs.</li>
+        <li>Connect with Alumni: Engage in direct communication to establish a meaningful connection with the supporting alumni.</li>
+        <li>Secure Funding: After completing the verification process and building a rapport with alumni, secure the funding you need to pursue your educational goals.</li>
+        <li>Access Mentorship: Explore our mentorship program and find experienced alumni mentors who can guide you in your academic and professional journey.</li>
+        <li>Network with Peers: Utilize our platform to connect with peers from diverse backgrounds, forming a supportive network that fosters growth and collaboration.</li>
+      </ol>
+      <p class="how-it-works-text">
+        At AlumFin, we believe in empowering students by connecting them with alumni for financial aid and mentorship. Join us on this transformative educational adventure and build a legacy of success for yourself and future generations.
+      </p>
+    </div>
+  </section>
+
+  <!-- Professional Footer Section -->
+  <footer class="footer-section">
+    <div class="footer-content">
+      <ul class="footer-links">
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+      <div class="social-media-icons">
+        <!-- Add social media icons here, linking to your company's profiles -->
+      </div>
     </div>
   </footer>
+
 </body>
 
-  </html>
+</html>
