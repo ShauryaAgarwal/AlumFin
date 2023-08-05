@@ -1002,6 +1002,8 @@
     const alumniPopup = document.querySelector(".alumni-button");
     const studentPopup = document.querySelector(".student-button");
     const iconClose = document.querySelector(".icon-close");
+    const loginForm = document.querySelector(".form-box.login form");
+    const registerForm = document.querySelector(".form-box.register form");
     
     registerLink.addEventListener("click", () => {
       formWrapper.classList.add("active-registration");
@@ -1023,6 +1025,73 @@
       formWrapper.classList.remove("active-alumni-popup");
       formWrapper.classList.remove("active-student-popup");
       formWrapper.classList.remove("active-registration");
+    });
+    
+    loginForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = e.target.elements.email.value;
+      const password = e.target.elements.password.value;
+    
+      // Send the login data to your backend API for authentication
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password })
+      });
+    
+      if (response.ok) {
+        // Login successful
+        // You can redirect the user to the main page or perform other actions
+        window.location.href = "/forum";
+      } else {
+        // Login failed
+        // Show an error message to the user
+      }
+    });
+    
+    registerForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const fullName = e.target.elements.fullName.value;
+      const email = e.target.elements.email.value;
+      const password = e.target.elements.password.value;
+      const institution = e.target.elements.institution.value;
+      const graduationYear = e.target.elements.graduationYear.value;
+      //const agreeTerms = e.target.elements.agreeTerms.checked;
+    
+      // Perform client-side validation if needed
+    
+      /*
+      if (!agreeTerms) {
+        // Show an error message to the user that they must agree to the terms
+        return;
+      }
+      */
+    
+      // Send the registration data to your backend API for registration
+      const response = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          fullName,
+          email,
+          password,
+          institution,
+          graduationYear
+        })
+      });
+    
+      if (response.ok) {
+        // Registration successful
+        // You can redirect the user to the login page or perform other actions
+        window.location.href = "/forum";
+      } else {
+        // Registration failed
+        // Show an error message to the user
+      }
     });
   </script>
 
