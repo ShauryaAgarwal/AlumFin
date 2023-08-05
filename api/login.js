@@ -1,45 +1,43 @@
-import { Client } from 'pg';
+// api/login.js
+
+import { Client } from "pg";
 
 export default async function handler(req, res) {
-  if (req.method === 'POST') {
-    const { email, password } = req.body;
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
 
-    // Initialize the database client with the connection URL from Vercel
-    const client = new Client({
-      connectionString: process.env.POSTGRES_URL,
-      ssl: {
-        rejectUnauthorized: false, // For self-signed certificates (local development)
-      },
-    });
+  const { email, password } = req.body;
 
-    try {
-      await client.connect();
+  // Create a new PostgreSQL client
+  const client = new Client({
+    connectionString: process.env.POSTGRES_URL,
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  });
 
-      // Fetch user information from the "users" table based on the email
-      const result = await client.query(`
-        SELECT * FROM users WHERE email = $1
-      `, [email]);
+  try {
+    await client.connect();
 
-      if (result.rows.length === 0) {
-        // User with the given email not found
-        return res.status(404).json({ message: 'User not found' });
-      }
+    // Perform the login query to check if the user exists in the database
+    const result = await client.query(
+      `SELECT * FROM users WHERE email = $1 AND password = $2`,
+      [email, password]
+    );
 
-      const user = result.rows[0];
-
-      if (user.password !== password) {
-        // Incorrect password
-        return res.status(401).json({ message: 'Incorrect password' });
-      }
-
-      res.status(200).json({ message: 'Login successful!', user });
-    } catch (error) {
-      console.error('Error during user login:', error);
-      res.status(500).json({ message: 'Internal server error' });
-    } finally {
-      await client.end();
+    if (result.rows.length > 0) {
+      // Login successful
+      return res.status(200).json({ message: "Login successful" });
+    } else {
+      // Login failed
+      return res.status(401).json({ error: "Invalid credentials" });
     }
-  } else {
-    res.status(405).json({ message: 'Method not allowed' });
+  } catch (error) {
+    console.error("Error during login:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  } finally {
+    // Close the PostgreSQL client
+    await client.end();
   }
 }
