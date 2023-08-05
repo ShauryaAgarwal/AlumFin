@@ -1,34 +1,50 @@
-import { Client } from 'pg';
+// api/register.js
+
+import { Client } from "pg";
 
 export default async function handler(req, res) {
-  if (req.method === 'POST') {
-    const { fullName, email, password, institution, graduationYear } = req.body;
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
 
-    // Initialize the database client with the connection URL from Vercel
-    const client = new Client({
-      connectionString: process.env.POSTGRES_URL,
-      ssl: {
-        rejectUnauthorized: false, // For self-signed certificates (local development)
-      },
-    });
+  const { fullName, email, password, institution, graduationYear } = req.body;
 
-    try {
-      await client.connect();
+  // Perform client-side validation if needed
 
-      // Insert user information into the "users" table
-      await client.query(`
-        INSERT INTO users (full_name, email, password, institution, graduation_year)
-        VALUES ($1, $2, $3, $4, $5)
-      `, [fullName, email, password, institution, graduationYear]);
+  // Create a new PostgreSQL client
+  const client = new Client({
+    connectionString: process.env.POSTGRES_URL,
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  });
 
-      res.status(200).json({ message: 'User registered successfully!' });
-    } catch (error) {
-      console.error('Error during user registration:', error);
-      res.status(500).json({ message: 'Internal server error' });
-    } finally {
-      await client.end();
+  try {
+    await client.connect();
+
+    // Check if the email is already registered
+    const existingUser = await client.query(
+      `SELECT * FROM users WHERE email = $1`,
+      [email]
+    );
+
+    if (existingUser.rows.length > 0) {
+      return res.status(409).json({ error: "Email already registered" });
     }
-  } else {
-    res.status(405).json({ message: 'Method not allowed' });
+
+    // Perform the registration query to insert the new user into the database
+    await client.query(
+      `INSERT INTO users (full_name, email, password, institution, graduation_year) VALUES ($1, $2, $3, $4, $5)`,
+      [fullName, email, password, institution, graduationYear]
+    );
+
+    // Registration successful
+    return res.status(201).json({ message: "Registration successful" });
+  } catch (error) {
+    console.error("Error during registration:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  } finally {
+    // Close the PostgreSQL client
+    await client.end();
   }
 }
